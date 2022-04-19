@@ -4,8 +4,9 @@ import utilStyles from '../styles/utils.module.css'
 import { getSortedPostsData  } from '../lib/posts'
 import Link from 'next/link'
 import Date from '../components/date'
+import { GetStaticProps } from 'next'
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
   const allPostsData = getSortedPostsData()
   return {
     props: {
@@ -14,15 +15,23 @@ export async function getStaticProps() {
   }
 }
 
-export default function Home({allPostsData}) {
+export default function Home({
+  allPostsData
+}: {
+  allPostsData: {
+    date: string
+    title: string
+    id: string
+  }[]
+}) {
   return (
     <Layout home>
       <Head>
         <title>{siteTitle}</title>
       </Head>
       <section className={utilStyles.headingMd}>
-        <p>Hi I'm <strong>Duc</strong>. I like creative and programming work. 
-        You can check out my personal blog or contact me <a href='https://www.linkedin.com/in/ductran99/' target='_blank'>here</a>.</p>
+        <p>Hi I&#39;m <strong>Duc</strong>. I like creative and programming work. 
+        You can check out my personal blog or contact me <a href='https://www.linkedin.com/in/ductran99/' target='_blank' rel='noreferrer'>here</a>.</p>
       </section>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>Blog</h2>

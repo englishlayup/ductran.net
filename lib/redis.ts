@@ -30,25 +30,6 @@ const schema = new Schema(
     }
 )
 
-export async function createPost(
-    data: {
-        title: string;
-        date: Date;
-        description: string;
-        content: string;
-    }) {
-
-    await connect()
-
-    const repository = client.fetchRepository(schema)
-
-    const post = repository.createEntity(data)
-
-    const id = await repository.save(post)
-    
-    return id
-}
-
 export async function getAllPosts() {
     await connect();
     const repository = client.fetchRepository(schema)

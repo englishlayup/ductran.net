@@ -1,7 +1,9 @@
-import { remark } from 'remark'
-import html from 'remark-html'
-
-import { getAllPosts, getPost } from './redis'
+import { getAllPosts, getPost } from './redis';
+import { unified } from 'unified';
+import remarkParse from 'remark-parse';
+import remarkRehype from 'remark-rehype';
+import rehypeStringify from 'rehype-stringify';
+import rehypeExternalLinks from 'rehype-external-links';
 
 export async function getSortedPostsData() {
 
@@ -36,8 +38,11 @@ export async function getPostData(id: string) {
 
   const post = await getPost(id);
 
-  const processedContent = await remark()
-    .use(html)
+  const processedContent = await unified()
+    .use(remarkParse)
+    .use(remarkRehype)
+    .use(rehypeExternalLinks, {target: '_blank', rel: ['noreferrer']})
+    .use(rehypeStringify)
     .process(post.content);
   
   const contentHtml = processedContent.toString();

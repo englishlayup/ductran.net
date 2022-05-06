@@ -1,9 +1,9 @@
-import { getAllPosts, getPost } from './redis';
-import { unified } from 'unified';
+import rehypeExternalLinks from 'rehype-external-links';
+import rehypeStringify from 'rehype-stringify';
 import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
-import rehypeStringify from 'rehype-stringify';
-import rehypeExternalLinks from 'rehype-external-links';
+import { unified } from 'unified';
+import { getAllPosts, getPost } from './redis';
 
 export async function getSortedPostsData() {
 

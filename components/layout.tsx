@@ -1,26 +1,24 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import Link from 'next/link'
-import utilStyles from '../styles/utils.module.css'
-import styles from './layout.module.css'
+import Head from "next/head";
+import Image from "next/image";
+import Link from "next/link";
+import utilStyles from "../styles/utils.module.css";
+import styles from "./layout.module.css";
 
-const name = 'Duc Tran'
-export const siteTitle = 'Duc Tran'
+const name = "Duc Tran";
+export const siteTitle = "Duc Tran";
 
-export default function Layout({ 
-  children, 
-  home 
+export default function Layout({
+  children,
+  home,
 }: {
-  children: React.ReactNode
-  home?: boolean
+  children: React.ReactNode;
+  home?: boolean;
 }) {
   return (
     <div className={styles.container}>
       <Head>
         <link rel="icon" href="/favicon.ico" />
-        <meta
-          name="description"
-        />
+        <meta name="description" />
         <meta
           property="og:image"
           content={`https://og-image.vercel.app/${encodeURI(
@@ -74,5 +72,5 @@ export default function Layout({
         </div>
       )}
     </div>
-  )
+  );
 }

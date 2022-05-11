@@ -6,5 +6,5 @@ export default async function handler(
   res: NextApiResponse
 ) {
   await createIndex();
-  res.status(200).send("ok");
+  res.status(200).send("Index created.");
 }

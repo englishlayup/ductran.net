@@ -15,14 +15,14 @@ interface Post {
   content: string;
 }
 
-class Post extends Entity {}
+class Post extends Entity { }
 
 const schema = new Schema(
   Post,
   {
-    title: { type: "string" },
+    title: { type: "text" },
     date: { type: "date", sortable: true },
-    description: { type: "string" },
+    description: { type: "text" },
     content: { type: "string" },
   },
   {
@@ -48,14 +48,13 @@ export async function searchPosts(q: string) {
   await connect();
 
   const repository = client.fetchRepository(schema);
-  const posts = await repository
-    .search()
-    .where("title")
-    .matches(q)
-    .or("description")
-    .matches(q)
+
+  const posts = await repository.search()
+    .where("title").matches(q)
+    .or("description").matches(q)
     .sortDescending("date")
     .return.all();
+
   return posts;
 }
 

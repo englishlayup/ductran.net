@@ -38,7 +38,6 @@ export default function Layout({
               height={144}
               width={144}
               alt={name}
-              quality={100}
             />
             <h1 className={utilStyles.heading2Xl}>{name}</h1>
           </>
@@ -53,7 +52,6 @@ export default function Layout({
                   height={108}
                   width={108}
                   alt={name}
-                  quality={100}
                 />
               </a>
             </Link>

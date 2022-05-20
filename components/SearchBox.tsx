@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
 
-export default function SearchBar() {
+export default function SearchBox() {
     const [hits, setHits] = useState([]);
 
     const search = async (event: FormEvent) => {

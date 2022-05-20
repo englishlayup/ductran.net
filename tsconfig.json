@@ -22,8 +22,10 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
-, "components/PostForm.ts"  ],
+    "**/*.tsx",
+    "components/PostForm.ts",
+    "../publish-post/src/george.ts"
+  ],
   "exclude": [
     "node_modules"
   ]

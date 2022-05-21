@@ -13,9 +13,10 @@ interface Post {
   date: Date;
   description: string;
   content: string;
+  filename: string;
 }
 
-class Post extends Entity { }
+class Post extends Entity {}
 
 const schema = new Schema(
   Post,
@@ -24,6 +25,7 @@ const schema = new Schema(
     date: { type: "date", sortable: true },
     description: { type: "text" },
     content: { type: "string" },
+    filename: { type: "string" },
   },
   {
     dataStructure: "JSON",
@@ -49,9 +51,12 @@ export async function searchPosts(q: string) {
 
   const repository = client.fetchRepository(schema);
 
-  const posts = await repository.search()
-    .where("title").matches(q)
-    .or("description").matches(q)
+  const posts = await repository
+    .search()
+    .where("title")
+    .matches(q)
+    .or("description")
+    .matches(q)
     .sortDescending("date")
     .return.all();
 

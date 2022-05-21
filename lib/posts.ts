@@ -31,6 +31,18 @@ export async function getAllPostIds() {
   });
 }
 
+export async function getAllPostPaths() {
+  const posts = await getAllPosts();
+
+  return posts.map((post) => {
+    return {
+      params: {
+        path: post.filename,
+      },
+    };
+  });
+}
+
 export async function getPostData(id: string) {
   const post = await getPost(id);
 

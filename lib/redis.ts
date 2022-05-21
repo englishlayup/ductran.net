@@ -63,6 +63,16 @@ export async function searchPosts(q: string) {
   return posts;
 }
 
+export async function getPostByPath(q: string) {
+  await connect();
+
+  const repository = client.fetchRepository(schema);
+
+  const posts = await repository.search().where("filename").eq(q).return.all();
+
+  return posts;
+}
+
 export async function getPost(id: string) {
   await connect();
   const repository = client.fetchRepository(schema);

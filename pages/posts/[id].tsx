@@ -2,7 +2,7 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 import Date from "../../components/date";
 import Layout from "../../components/layout";
-import { getAllPostPaths, getPostData } from "../../lib/posts";
+import { getAllPostIds, getPostData } from "../../lib/posts";
 import utilStyles from "../../styles/utils.module.css";
 
 export default function Post({
@@ -31,8 +31,7 @@ export default function Post({
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = await getAllPostPaths();
-  console.log(paths);
+  const paths = await getAllPostIds();
   return {
     paths,
     fallback: false,

@@ -6,8 +6,6 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const q = req.query.q;
-  if (typeof q === "string") {
-    const posts = await searchPosts(q);
-    res.status(200).json({ posts });
-  }
+  const posts = await searchPosts(q as string);
+  res.status(200).json({ posts });
 }

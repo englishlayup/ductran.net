@@ -13,6 +13,7 @@ interface Post {
   date: Date;
   description: string;
   content: string;
+  filename: string;
 }
 
 class Post extends Entity {}
@@ -20,10 +21,11 @@ class Post extends Entity {}
 const schema = new Schema(
   Post,
   {
-    title: { type: "string" },
+    title: { type: "text" },
     date: { type: "date", sortable: true },
-    description: { type: "string" },
+    description: { type: "text" },
     content: { type: "string" },
+    filename: { type: "string" },
   },
   {
     dataStructure: "JSON",
@@ -48,6 +50,7 @@ export async function searchPosts(q: string) {
   await connect();
 
   const repository = client.fetchRepository(schema);
+
   const posts = await repository
     .search()
     .where("title")
@@ -56,7 +59,18 @@ export async function searchPosts(q: string) {
     .matches(q)
     .sortDescending("date")
     .return.all();
+
   return posts;
+}
+
+export async function getPostByPath(q: string) {
+  await connect();
+
+  const repository = client.fetchRepository(schema);
+
+  const post = await repository.search().where("filename").eq(q).return.all();
+
+  return post[0];
 }
 
 export async function getPost(id: string) {

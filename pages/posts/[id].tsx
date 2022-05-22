@@ -2,7 +2,8 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 import Date from "../../components/date";
 import Layout from "../../components/layout";
-import { getAllPostIds, getPostData } from "../../lib/posts";
+import { getAllPostPaths, getPostData } from "../../lib/posts";
+import { getPostByPath } from "../../lib/redis";
 import utilStyles from "../../styles/utils.module.css";
 
 export default function Post({
@@ -24,14 +25,17 @@ export default function Post({
         <div className={utilStyles.lightText}>
           <Date dateString={postData.date} />
         </div>
-        <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
+        <div
+          className="prose"
+          dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
+        />
       </article>
     </Layout>
   );
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = await getAllPostIds();
+  const paths = await getAllPostPaths();
   return {
     paths,
     fallback: false,
@@ -39,7 +43,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const postData = await getPostData(params.id as string);
+  const post = await getPostByPath(params.id as string);
+  const postData = await getPostData(post.entityId);
   return {
     props: {
       postData,

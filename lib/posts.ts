@@ -9,7 +9,7 @@ export async function getSortedPostsData() {
   const posts = await getAllPosts();
 
   const allPostsData = posts.map((post) => {
-    const id = post.entityId;
+    const id = post.filename;
     const date = new Date(post.date.toString()).toISOString();
     const title = post.title;
 
@@ -37,7 +37,7 @@ export async function getAllPostPaths() {
   return posts.map((post) => {
     return {
       params: {
-        path: post.filename,
+        id: post.filename,
       },
     };
   });

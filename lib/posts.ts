@@ -3,7 +3,7 @@ import rehypeStringify from "rehype-stringify";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import { unified } from "unified";
-import { getAllPosts, getPost } from "./redis";
+import { getAllPosts, getPostByPath } from "./redis";
 
 export async function getSortedPostsData() {
   const posts = await getAllPosts();
@@ -37,14 +37,14 @@ export async function getAllPostPaths() {
   return posts.map((post) => {
     return {
       params: {
-        id: post.filename,
+        pid: post.filename,
       },
     };
   });
 }
 
-export async function getPostData(id: string) {
-  const post = await getPost(id);
+export async function getPostData(path: string) {
+  const post = await getPostByPath(path);
 
   const processedContent = await unified()
     .use(remarkParse)
@@ -56,9 +56,10 @@ export async function getPostData(id: string) {
   const contentHtml = processedContent.toString();
   const date = new Date(post.date.toString()).toISOString();
   const title = post.title;
+  const id = post.entityId;
 
   return {
-    id,
+    id: id,
     contentHtml,
     date,
     title,

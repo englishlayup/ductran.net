@@ -3,7 +3,6 @@ import Head from "next/head";
 import Date from "../../components/date";
 import Layout from "../../components/layout";
 import { getAllPostPaths, getPostData } from "../../lib/posts";
-import { getPostByPath } from "../../lib/redis";
 import utilStyles from "../../styles/utils.module.css";
 
 export default function Post({
@@ -43,8 +42,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const post = await getPostByPath(params.id as string);
-  const postData = await getPostData(post.entityId);
+  // const post = await getPostByPath(params.id as string);
+  const postData = await getPostData(params.pid as string);
   return {
     props: {
       postData,

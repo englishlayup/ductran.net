@@ -1,3 +1,6 @@
+import { faGithubAlt, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import { faIdCard } from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -40,6 +43,32 @@ export default function Layout({
 							alt={name}
 						/>
 						<h1 className={utilStyles.heading2Xl}>{name}</h1>
+						<ul className="flex flex-row justify-center space-x-2">
+							<li className="w-10 flex justify-center">
+								<a
+									href="https://www.linkedin.com/in/ductran99/"
+									target="_blank"
+									rel="noreferrer"
+									color="black"
+								>
+									<FontAwesomeIcon icon={faLinkedin} fixedWidth size="xs" />
+								</a>
+							</li>
+							<li className="w-10 flex justify-center items-end">
+								<a
+									href="https://github.com/englishlayup"
+									target="_blank"
+									rel="noreferrer"
+								>
+									<FontAwesomeIcon icon={faGithubAlt} fixedWidth size="xs" />
+								</a>
+							</li>
+							<li className="w-10 flex justify-center items-center">
+								<a href="/files/Resume.pdf" target="_blank" rel="noreferrer">
+									<FontAwesomeIcon icon={faIdCard} fixedWidth size="xs" />
+								</a>
+							</li>
+						</ul>
 					</>
 				) : (
 					<>

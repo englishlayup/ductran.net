@@ -5,10 +5,12 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import utilStyles from '../styles/utils.module.css';
-import styles from './layout.module.css';
-
 const name = 'Duc Tran';
 export const siteTitle = 'Duc Tran';
+
+function ContactLink(children: React.ReactNode) {
+	return <li></li>;
+}
 
 export default function Layout({
 	children,
@@ -18,7 +20,7 @@ export default function Layout({
 	home?: boolean;
 }) {
 	return (
-		<div className={styles.container}>
+		<div className="grid grid-cols-1 max-w-2xl mt-12 mx-auto mb-24 px-4">
 			<Head>
 				<link rel="icon" href="/favicon.ico" />
 				<meta name="description" />
@@ -31,7 +33,7 @@ export default function Layout({
 				<meta name="og:title" content={siteTitle} />
 				<meta name="twitter:card" content="summary_large_image" />
 			</Head>
-			<header className={styles.header}>
+			<header className="grid grid-cols-1 justify-items-center max-w-xs mx-auto shadow-xl rounded-xl p-4">
 				{home ? (
 					<>
 						<Image
@@ -43,32 +45,32 @@ export default function Layout({
 							alt={name}
 						/>
 						<h1 className={utilStyles.heading2Xl}>{name}</h1>
-						<ul className="flex flex-row justify-center space-x-2">
-							<li className="w-10 flex justify-center">
-								<a
-									href="https://www.linkedin.com/in/ductran99/"
-									target="_blank"
-									rel="noreferrer"
-									color="black"
-								>
-									<FontAwesomeIcon icon={faLinkedin} fixedWidth size="xs" />
-								</a>
-							</li>
-							<li className="w-10 flex justify-center items-end">
-								<a
-									href="https://github.com/englishlayup"
-									target="_blank"
-									rel="noreferrer"
-								>
-									<FontAwesomeIcon icon={faGithubAlt} fixedWidth size="xs" />
-								</a>
-							</li>
-							<li className="w-10 flex justify-center items-center">
-								<a href="/files/Resume.pdf" target="_blank" rel="noreferrer">
-									<FontAwesomeIcon icon={faIdCard} fixedWidth size="xs" />
-								</a>
-							</li>
-						</ul>
+						<div className="grid grid-cols-3 gap-3 w-32 items-center">
+							<a
+								href="https://www.linkedin.com/in/ductran99/"
+								target="_blank"
+								rel="noreferrer"
+								className="text-inherit"
+							>
+								<FontAwesomeIcon icon={faLinkedin} size="1x" />
+							</a>
+							<a
+								href="https://github.com/englishlayup"
+								target="_blank"
+								rel="noreferrer"
+								className="text-inherit"
+							>
+								<FontAwesomeIcon icon={faGithubAlt} size="1x" />
+							</a>
+							<a
+								href="/files/Resume.pdf"
+								target="_blank"
+								rel="noreferrer"
+								className="text-inherit"
+							>
+								<FontAwesomeIcon icon={faIdCard} size="1x" />
+							</a>
+						</div>
 					</>
 				) : (
 					<>
@@ -94,7 +96,7 @@ export default function Layout({
 			</header>
 			<main>{children}</main>
 			{!home && (
-				<div className={styles.backToHome}>
+				<div className="mt-12">
 					<Link href="/">
 						<a>← Back to home</a>
 					</Link>

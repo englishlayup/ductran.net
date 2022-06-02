@@ -18,9 +18,8 @@ export default function Post({
 			<Head>
 				<title>{postData.title}</title>
 			</Head>
-			<article className="prose">
+			<article className="prose mx-auto">
 				<h1>{postData.title}</h1>
-				{/* <div className={utilStyles.lightText}></div> */}
 				<Date dateString={postData.date} />
 				<div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
 			</article>
@@ -37,7 +36,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-	// const post = await getPostByPath(params.id as string);
 	const postData = await getPostData(params.pid as string);
 	return {
 		props: {

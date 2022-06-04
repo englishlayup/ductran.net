@@ -6,14 +6,12 @@ export default function SearchBox() {
 
 	const search = async (event: FormEvent) => {
 		const q = (event.target as HTMLInputElement).value;
-		console.log(q);
 		if (q.length > 2) {
 			const params = new URLSearchParams({ q });
 
 			const res = await fetch('/api/search?' + params);
 
 			const result = await res.json();
-			console.log(hits);
 			setHits(result['posts']);
 		}
 	};

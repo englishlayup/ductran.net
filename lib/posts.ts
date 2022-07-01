@@ -56,6 +56,14 @@ export async function getPostData(path: string) {
 	const contentHtml = processedContent.toString();
 	const date = new Date(post.date.toString()).toISOString();
 	const title = post.title;
+	const processedDescription = await unified()
+		.use(remarkParse)
+		.use(remarkRehype)
+		.use(rehypeExternalLinks, { target: '_blank', rel: ['noreferrer'] })
+		.use(rehypeStringify)
+		.process(post.description);
+
+	const descriptionHtml = processedDescription.toString();
 	const id = post.entityId;
 
 	return {
@@ -63,5 +71,6 @@ export async function getPostData(path: string) {
 		contentHtml,
 		date,
 		title,
+		descriptionHtml,
 	};
 }

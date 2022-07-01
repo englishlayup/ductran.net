@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { FormEvent, useState } from 'react';
+import Date from './date';
 
 export default function SearchBox() {
 	const [hits, setHits] = useState([]);
@@ -49,7 +50,8 @@ export default function SearchBox() {
 						>
 							<Link href={`/posts/${hit.filename}`}>
 								<a>
-									<strong>{hit.title}</strong> <br /> {hit.description}
+									<strong>{hit.title}</strong> <br />
+									<Date dateString={hit.date} />
 								</a>
 							</Link>
 						</li>

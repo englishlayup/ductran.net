@@ -56,6 +56,7 @@ export async function getPostData(path: string) {
 	const contentHtml = processedContent.toString();
 	const date = new Date(post.date.toString()).toISOString();
 	const title = post.title;
+	const description = post.description;
 	const id = post.entityId;
 
 	return {
@@ -63,5 +64,6 @@ export async function getPostData(path: string) {
 		contentHtml,
 		date,
 		title,
+		description,
 	};
 }

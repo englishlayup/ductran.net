@@ -11,6 +11,7 @@ export default function Post({
 		title: string;
 		date: string;
 		contentHtml: string;
+		description: string;
 	};
 }) {
 	return (
@@ -21,6 +22,9 @@ export default function Post({
 			<article className="prose mx-auto">
 				<h1>{postData.title}</h1>
 				<Date dateString={postData.date} />
+				<p>
+					<i>{postData.description}</i>
+				</p>
 				<div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
 			</article>
 		</Layout>
